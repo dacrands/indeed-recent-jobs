@@ -1,2 +1,2 @@
-const manifestTitle = document.getElementById("manifest");
-manifestTitle.innerText = "dave you rock"
+const jobs = document.getElementsByClassName('jobsearch-SerpJobCard');
+console.log(jobs)

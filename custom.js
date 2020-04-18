@@ -1,2 +1,6 @@
-const jobs = document.getElementsByClassName('jobsearch-SerpJobCard');
-console.log(jobs)
+let jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer');
+console.log(jobFooters)
+
+for (let footer of jobFooters) {
+  console.log(footer)
+}

@@ -1,7 +1,20 @@
 let jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer');
-
+const regex = /\d+/;
 for (let footer of jobFooters) {
-  if(!footer.innerText.includes('30+')) {
+  let daysOld;  
+  if (footer.innerText.includes('Just posted') || footer.innerText.includes('Today')) {
+    daysOld = 0;
+  } else {
+    daysOld = Number(regex.exec(footer.innerText)[0]);
+  }
+
+  if (daysOld < 7) {
     footer.parentElement.style.border = '2px solid #c5decc';
+  }
+  else if (daysOld < 14 && daysOld >= 7) {
+    footer.parentElement.style.border = '2px solid #e0dc82';
+  } 
+  else {
+    footer.parentElement.style.opacity = '0.5';
   }
 }

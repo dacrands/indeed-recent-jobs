@@ -7,7 +7,10 @@ for (let footer of jobFooters) {
   } else {
     daysOld = Number(regex.exec(footer.innerText)[0]);
   }
+  applyStyleToPost(footer, daysOld);
+}
 
+function applyStyleToPost(footer, daysOld) {
   if (daysOld < 7) {
     footer.parentElement.style.border = '2px solid #c5decc';
   }

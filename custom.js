@@ -1,13 +1,18 @@
 let jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer');
 const regex = /\d+/;
 for (let footer of jobFooters) {
+  let daysOld = getPostAge(footer);
+  applyStyleToPost(footer, daysOld);
+}
+
+function getPostAge(footer) {
   let daysOld;  
   if (footer.innerText.includes('Just posted') || footer.innerText.includes('Today')) {
     daysOld = 0;
   } else {
     daysOld = Number(regex.exec(footer.innerText)[0]);
   }
-  applyStyleToPost(footer, daysOld);
+  return daysOld;
 }
 
 function applyStyleToPost(footer, daysOld) {

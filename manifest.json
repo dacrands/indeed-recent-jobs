@@ -9,7 +9,9 @@
   },
   "content_scripts" : [
     {
-      "matches": ["https://indeed.com/*"],
+      "matches": [
+        "https://*.indeed.com/jobs*"        
+      ],
       "js": ["custom.js"]
     }
   ],

@@ -1,7 +1,7 @@
 {
-  "name": "Getting Started Example",
+  "name": "Indeed Date Highlighter",
   "version": "1.0",
-  "description": "Build an Extension!",
+  "description": "Higlights indeed job posts based on date",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {
     "scripts": ["background.js"],

@@ -1,4 +1,4 @@
-let jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer');
+var jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer');
 const digitsRegex = /\d+/;
 
 for (let footer of jobFooters) {

@@ -1,5 +1,5 @@
 var jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer');
-const digitsRegex = /\d+/;
+var digitsRegex = /\d+/;
 
 for (let footer of jobFooters) {
   let daysOld = getPostAge(footer);

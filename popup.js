@@ -12,10 +12,10 @@ window.onload = function() {
 companyBtn.onclick = function() {
   chrome.storage.sync.get(['badCompanies'], function(result) {
     let badCompanies = Array.from(result.badCompanies)
-    badCompanies.push(companyInput.value);
+    let newCompany = companyInput.value;
+    badCompanies.push(newCompany);
     chrome.storage.sync.set({ badCompanies }, function() {
-      console.log('Added bad company to storage')
-      window.location.reload();
+      console.log(`Added ${newCompany} to bad company list`)
     });
   })  
 }

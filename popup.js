@@ -3,12 +3,25 @@ let companyBtn = document.getElementById('companyBtn');
 const btns = document.querySelector('.btns');
 const chromeStorageSync = chrome.storage.sync;
 
+function removeCompany(companyName) {
+  chromeStorageSync.get(['badCompanies'], result => {
+    let compArr = result.badCompanies
+                    .filter(c => c !== companyName);
+    chromeStorageSync.set({ badCompanies: compArr })
+  })
+}
+
 function createCompanyBtns(compArr) {
   btns.innerHTML = '';
   for (const co of compArr) {
-    let newBtn = document.createElement('button');
-    newBtn.innerText =  co;
+    let newBtn = document.createElement('button');  
+    newBtn.classList.add('btns__btn')  
+    newBtn.innerHTML = `${co} &#10060;`;    
     btns.appendChild(newBtn);
+    newBtn.onclick = function() {
+      removeCompany(co)
+      this.parentNode.removeChild(this)
+    }
   }
 } 
 

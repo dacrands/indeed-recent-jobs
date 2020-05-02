@@ -15,8 +15,9 @@ function createCompanyBtns(compArr) {
   btns.innerHTML = '';
   for (const co of compArr) {
     let newBtn = document.createElement('button');  
-    newBtn.classList.add('btns__btn')  
-    newBtn.innerHTML = `${co} &#10060;`;    
+    newBtn.classList.add('btns__btn'); 
+    newBtn.setAttribute('title', `Remove ${co}`) 
+    newBtn.innerHTML = `${co} &#11199;`;    
     btns.appendChild(newBtn);
     newBtn.onclick = function() {
       removeCompany(co)

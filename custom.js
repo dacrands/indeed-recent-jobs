@@ -1,9 +1,29 @@
 var jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer');
+var jobCompanies = document.getElementsByClassName('company');
 var digitsRegex = /\d+/;
 
 for (let footer of jobFooters) {
   let daysOld = getPostAge(footer);
   applyStyleToPost(footer, daysOld);
+}
+
+chrome.storage.sync.get(['badCompanies'], function(result) {
+  for (let co of jobCompanies) {
+    let company = getPostCompany(co);
+    if(result.badCompanies.includes(company)) {
+      let post = co.parentElement.parentElement.parentElement;
+      post.innerHTML = `WARNING: ${company} is bad!`;
+      post.style.cssText = `
+        border: 1px solid red;
+        color: red !important;
+        font-weight: bold;
+      `;
+    }
+  }
+})
+
+function getPostCompany(companySpan) {
+  return companySpan.innerText;
 }
 
 function getPostAge(footer) {

@@ -3,8 +3,16 @@ let companyBtn = document.getElementById('companyBtn');
 const btns = document.querySelector('.btns');
 const chromeStorageSync = chrome.storage.sync;
 
+
 window.onload = function() {  
-  chromeStorageSync.set({ badCompanies : ['revature', 'cybercoders', 'FDM Group'] })
+  chromeStorageSync.get(['badCompanies'], result => {
+    if (!result.badCompanies) {
+      console.log(`Setting companies`)
+      chromeStorageSync.set({ badCompanies : ['revature', 'cybercoders', 'FDM Group'] })
+    } else {
+      console.log(`Current companies: ${result.badCompanies}`)
+    }
+  });
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.executeScript(
         tabs[0].id,
@@ -18,7 +26,7 @@ companyBtn.onclick = function() {
     let newCompany = companyInput.value;
     badCompanies.push(newCompany);
     chromeStorageSync.set({ badCompanies }, function() {
-      console.log(`Added ${newCompany} to bad company list`)
+      console.log(`Added ${newCompany} to bad company list. Bad Companies: ${badCompanies}`)
     });
   })  
 }

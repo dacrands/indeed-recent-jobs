@@ -1,5 +1,5 @@
 {
-  "name": "Indeed Date Highlighter",
+  "name": "Indoubt",
   "version": "1.0",
   "description": "Higlights indeed job posts based on date",
   "permissions": ["activeTab", "declarativeContent", "storage"],

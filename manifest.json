@@ -1,6 +1,6 @@
 {
   "name": "Indoubt",
-  "version": "1.0",
+  "version": "0.0.0.1",
   "description": "Higlights indeed job posts based on date",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {

@@ -1,7 +1,4 @@
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.storage.onChanged.addListener(function(changes, area){
-    chrome.tabs.executeScript({ file: 'custom.js'})
-  })
+chrome.runtime.onInstalled.addListener(() => {  
   chrome.declarativeContent.onPageChanged.removeRules(undefined, () => {
     chrome.declarativeContent.onPageChanged.addRules([{
       conditions: [new chrome.declarativeContent.PageStateMatcher({

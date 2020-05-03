@@ -2,6 +2,7 @@ let companyInput = document.getElementById('companyInput');
 let companyBtn = document.getElementById('companyBtn');
 const btns = document.querySelector('.btns');
 const chromeStorageSync = chrome.storage.sync;
+const INIT_COMPANIES = ['revature']      
 
 function removeCompany(companyName) {
   chromeStorageSync.get(['badCompanies'], result => {
@@ -28,12 +29,11 @@ function createCompanyBtns(compArr) {
 
 window.onload = function() {  
   chromeStorageSync.get(['badCompanies'], result => {
-    if (!result.badCompanies) {
-      console.log(`Setting companies`)
-      chromeStorageSync.set({ badCompanies : ['revature', 'cybercoders', 'FDM Group'] })
-    } else {
-      console.log(`Current companies: ${result.badCompanies}`)
-      createCompanyBtns(result.badCompanies)
+    if (!result.badCompanies) {      
+      chromeStorageSync.set({ badCompanies :  INIT_COMPANIES });
+      createCompanyBtns(INIT_COMPANIES);
+    } else {      
+      createCompanyBtns(result.badCompanies);
     }
   });
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -41,7 +41,7 @@ window.onload = function() {
         tabs[0].id,
         {file: 'custom.js'});
   });
-};
+}
 
 companyBtn.onclick = function() {
   chromeStorageSync.get(['badCompanies'], function(result) {

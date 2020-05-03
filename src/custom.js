@@ -7,16 +7,18 @@ for (let footer of jobFooters) {
   applyStyleToPost(footer, daysOld);
 }
 
-chrome.storage.sync.get(['badCompanies'], function(result) {
-  for (let co of jobCompanies) {
-    let company = getPostCompany(co);
+chrome.storage.sync.get(['badCompanies'], function(result) {  
+  for (const co of jobCompanies) {
+    let company = getPostCompany(co);    
     if(result.badCompanies.includes(company)) {
       let post = co.parentElement.parentElement.parentElement;
       post.innerHTML = `WARNING: ${company} is bad!`;
+      // Add class `company` to preserve HTMLCollection length
+      post.classList.add('company');
       post.style.cssText = `
-        border: 1px solid red;
-        color: red !important;
-        font-weight: bold;
+      border: 1px solid red;
+      color: red !important;
+      font-weight: bold;
       `;
     }
   }

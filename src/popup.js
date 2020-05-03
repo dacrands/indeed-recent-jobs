@@ -36,11 +36,6 @@ window.onload = function() {
       createCompanyBtns(result.badCompanies);
     }
   });
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.executeScript(
-        tabs[0].id,
-        {file: 'custom.js'});
-  });
 }
 
 companyBtn.onclick = function() {
@@ -52,5 +47,10 @@ companyBtn.onclick = function() {
       console.log(`Added ${newCompany} to bad company list. Bad Companies: ${badCompanies}`)
       createCompanyBtns(badCompanies)
     });
-  })  
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.executeScript(
+          tabs[0].id,
+          {file: 'custom.js'});
+    });
+  });  
 }

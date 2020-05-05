@@ -1,6 +1,6 @@
 {
   "name": "Indoubt",
-  "version": "0.0.0.4",
+  "version": "0.0.0.5",
   "description": "Style indeed job posts based on age or if a post is from your list of bad companies",
   "permissions": ["activeTab", "declarativeContent", "storage"],
   "background": {

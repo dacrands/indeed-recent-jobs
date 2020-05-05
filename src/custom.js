@@ -40,13 +40,32 @@ function getPostAge(footer) {
 }
 
 function applyStyleToPost(footer, daysOld) {
+  let parent = footer.parentElement;
   if (daysOld < 7) {
-    footer.parentElement.style.border = '2px solid #c5decc';
+    parent.style.border = '2px solid #c5decc';
   }
   else if (daysOld < 14 && daysOld >= 7) {
-    footer.parentElement.style.border = '2px solid #e0dc82';
+    parent.style.border = '2px solid #e0dc82';
   } 
-  else {
-    footer.parentElement.style.opacity = '0.5';
+  else {    
+    let overlay = document.createElement('div');
+    parent.appendChild(overlay);
+    overlay.innerHTML = `<strong>Old Job </strong>(${daysOld} days old)`
+    overlay.style.cssText = `
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;      
+      color: red;
+      padding: 8px;
+      text-align: right;
+    `;
+    parent.style.cssText = `
+      position: relative;
+      opacity: 0.5;    
+      height: 52px;
+      overflow: hidden;
+    `;
   }
 }

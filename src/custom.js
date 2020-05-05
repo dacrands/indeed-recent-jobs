@@ -16,6 +16,7 @@ chrome.storage.sync.get(['badCompanies'], function(result) {
       // Add class `company` to preserve HTMLCollection length
       post.classList.add('company');
       post.style.cssText = `
+      opacity: 0.5;
       border: 1px solid red;
       color: red !important;
       font-weight: bold;

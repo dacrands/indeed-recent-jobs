@@ -2,7 +2,7 @@ let companyInput = document.getElementById('companyInput');
 let companyBtn = document.getElementById('companyBtn');
 const btns = document.querySelector('.btns');
 const chromeStorageSync = chrome.storage.sync;
-const INIT_COMPANIES = ['revature']      
+const INIT_COMPANIES = ['REVATURE']      
 
 function removeCompany(companyName) {
   chromeStorageSync.get(['badCompanies'], result => {
@@ -41,7 +41,7 @@ window.onload = function() {
 companyBtn.onclick = function() {
   chromeStorageSync.get(['badCompanies'], function(result) {
     let badCompanies = Array.from(result.badCompanies)
-    let newCompany = companyInput.value;
+    let newCompany = companyInput.value.toUpperCase();
     badCompanies.push(newCompany);
     chromeStorageSync.set({ badCompanies }, function() {
       console.log(`Added ${newCompany} to bad company list. Bad Companies: ${badCompanies}`)

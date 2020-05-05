@@ -9,7 +9,7 @@ for (let footer of jobFooters) {
 
 chrome.storage.sync.get(['badCompanies'], function(result) {  
   for (const co of jobCompanies) {
-    let company = getPostCompany(co);    
+    let company = getPostCompany(co).toUpperCase();    
     if(result.badCompanies.includes(company)) {
       let post = co.parentElement.parentElement.parentElement;
       post.innerHTML = `WARNING: ${company} is bad!`;

@@ -42,6 +42,10 @@ companyBtn.onclick = function() {
   chromeStorageSync.get(['badCompanies'], function(result) {
     let badCompanies = Array.from(result.badCompanies)
     let newCompany = companyInput.value.toUpperCase();
+    if (badCompanies.includes(newCompany)) {
+      alert(`"${newCompany}" is already in your list of bad companies.`);
+      return;
+    }
     badCompanies.push(newCompany);
     chromeStorageSync.set({ badCompanies }, function() {
       console.log(`Added ${newCompany} to bad company list. Bad Companies: ${badCompanies}`)

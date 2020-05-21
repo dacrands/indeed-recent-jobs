@@ -2,6 +2,31 @@ var jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer')
 var jobCompanies = document.getElementsByClassName('company');
 var digitsRegex = /\d+/;
 
+var BAD_CO_STYLE = `
+  opacity: 0.5;
+  border: 1px solid red;
+  color: red !important;
+  font-weight: bold;
+`;
+
+var OVERLAY_STYLE = `
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;      
+  color: red;
+  padding: 8px;
+  text-align: right;
+`;
+
+var OLD_JOB_STYLE = `
+  position: relative;
+  opacity: 0.5;    
+  height: 52px;
+  overflow: hidden;
+`;
+
 for (let footer of jobFooters) {
   let daysOld = getPostAge(footer);
   applyStyleToPost(footer, daysOld);
@@ -15,12 +40,7 @@ chrome.storage.sync.get(['badCompanies'], function(result) {
       post.innerHTML = `WARNING: ${company} is bad!`;
       // Add class `company` to preserve HTMLCollection length
       post.classList.add('company');
-      post.style.cssText = `
-      opacity: 0.5;
-      border: 1px solid red;
-      color: red !important;
-      font-weight: bold;
-      `;
+      post.style.cssText = BAD_CO_STYLE;
     }
   }
 })
@@ -51,21 +71,7 @@ function applyStyleToPost(footer, daysOld) {
     let overlay = document.createElement('div');
     parent.appendChild(overlay);
     overlay.innerHTML = `<strong>Old Job </strong>(${daysOld} days old)`
-    overlay.style.cssText = `
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      bottom: 0;      
-      color: red;
-      padding: 8px;
-      text-align: right;
-    `;
-    parent.style.cssText = `
-      position: relative;
-      opacity: 0.5;    
-      height: 52px;
-      overflow: hidden;
-    `;
+    overlay.style.cssText = OVERLAY_STYLE;
+    parent.style.cssText = OLD_JOB_STYLE;
   }
 }

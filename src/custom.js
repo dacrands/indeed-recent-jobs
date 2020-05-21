@@ -1,5 +1,7 @@
-var jobFooters = document.getElementsByClassName('jobsearch-SerpJobCard-footer');
-var jobCompanies = document.getElementsByClassName('company');
+var jobFooters = document.getElementsByClassName(
+  "jobsearch-SerpJobCard-footer"
+);
+var jobCompanies = document.getElementsByClassName("company");
 var digitsRegex = /\d+/;
 
 var BAD_CO_STYLE = `
@@ -32,26 +34,29 @@ for (let footer of jobFooters) {
   applyStyleToPost(footer, daysOld);
 }
 
-chrome.storage.sync.get(['badCompanies'], function(result) {  
+chrome.storage.sync.get(["badCompanies"], function (result) {
   for (const co of jobCompanies) {
-    let company = getPostCompany(co).toUpperCase();    
-    if(result.badCompanies.includes(company)) {
+    let company = getPostCompany(co).toUpperCase();
+    if (result.badCompanies.includes(company)) {
       let post = co.parentElement.parentElement.parentElement;
       post.innerHTML = `WARNING: ${company} is bad!`;
       // Add class `company` to preserve HTMLCollection length
-      post.classList.add('company');
+      post.classList.add("company");
       post.style.cssText = BAD_CO_STYLE;
     }
   }
-})
+});
 
 function getPostCompany(companySpan) {
   return companySpan.innerText;
 }
 
 function getPostAge(footer) {
-  let daysOld;  
-  if (footer.innerText.includes('Just posted') || footer.innerText.includes('Today')) {
+  let daysOld;
+  if (
+    footer.innerText.includes("Just posted") ||
+    footer.innerText.includes("Today")
+  ) {
     daysOld = 0;
   } else {
     daysOld = Number(digitsRegex.exec(footer.innerText)[0]);
@@ -62,15 +67,13 @@ function getPostAge(footer) {
 function applyStyleToPost(footer, daysOld) {
   let parent = footer.parentElement;
   if (daysOld < 7) {
-    parent.style.border = '2px solid #c5decc';
-  }
-  else if (daysOld < 14 && daysOld >= 7) {
-    parent.style.border = '2px solid #e0dc82';
-  } 
-  else {    
-    let overlay = document.createElement('div');
+    parent.style.border = "2px solid #c5decc";
+  } else if (daysOld < 14 && daysOld >= 7) {
+    parent.style.border = "2px solid #e0dc82";
+  } else {
+    let overlay = document.createElement("div");
     parent.appendChild(overlay);
-    overlay.innerHTML = `<strong>Old Job </strong>(${daysOld} days old)`
+    overlay.innerHTML = `<strong>Old Job </strong>(${daysOld} days old)`;
     overlay.style.cssText = OVERLAY_STYLE;
     parent.style.cssText = OLD_JOB_STYLE;
   }
